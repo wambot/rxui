@@ -65,7 +65,6 @@ class ParamEditorInt(QWidget):
             slide.setMinimum(math.log(min_value) * magic)
             slide.setMaximum(math.log(max_value) * magic)
             slide.setValue(math.log(data) * magic)
-            print slide.value(), slide.maximum(), slide.minimum()
             slide.valueChanged.connect(lambda x: update(math.exp(x / magic)))
             slide.valueChanged.connect(lambda x: spin.setValue(math.exp(x / magic)))
         else:
@@ -134,9 +133,6 @@ class ParamEditorFloat(QWidget):
         else:
             spin.valueChanged.connect(lambda x: slide.setValue(x * factor))
             slide.setMinimum(min_value * factor)
-            print "max_value", max_value
-            print "factor: %s" % factor
-            print "path: %s" % path
             slide.setMaximum(max_value * factor)
             slide.setValue(data * factor)
             slide.valueChanged.connect(lambda x: update(x / factor))
@@ -157,9 +153,6 @@ class ParamEditorString(QWidget):
         default    = meta.get("default", data)
         defines    = meta.get("defines")
         topic_type = meta.get("topic_type")
-
-        print defines, topic_type
-        print meta
 
         label = QLabel(name)
         layout = QVBoxLayout()
@@ -207,9 +200,6 @@ class ParamEditorDict(QWidget):
         layout = QVBoxLayout()
         for k in filter(lambda s: not s.endswith("__meta"), data.keys()):
             meta = data.get(k + "__meta")
-            if meta != None:
-                print "got meta for %s" % k
-                print "meta %s" % meta
             widget = create_control(path + "/" + k, data[k], meta)
             sublayout.addWidget(widget)
         group.setLayout(sublayout)

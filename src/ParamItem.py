@@ -9,9 +9,9 @@ class ParamItem(object):
         self.model = model
         if type(data) == dict:
             for k, v in data.items():
-                if not k.endswith(".meta"):
+                if not k.endswith("__meta"):
                     childdata = v
-                    childmeta = data.get(k + ".meta")
+                    childmeta = data.get(k + "__meta")
                     self.items[k] = ParamItem(k, self, childdata, childmeta, model)
             self.data = None
         else:
