@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import subprocess
 
 from PySide.QtCore import *
@@ -65,4 +67,13 @@ class NodeEdit(QWidget):
         self.create_node_button.setEnabled(True)
         self.args_lineedit.setEnabled(True)
         self.args_lineedit.setText(nodeitem.last_args)
+
+if __name__ == "__main__":
+    import sys
+    import roslib
+    roslib.load_manifest("roslib")
+    app = QApplication(sys.argv)
+    win = NodeEdit()
+    win.show()
+    app.exec_()
 
