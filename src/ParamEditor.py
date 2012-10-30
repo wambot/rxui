@@ -161,8 +161,8 @@ class ParamEditorString(QWidget):
         if defines == "topic" and topic_type != None:
             combo = QComboBox()
             combo.addItems([""] + rostopic.find_by_type(topic_type))
-            combo.currentIndexChanged.connect(lambda ind: rospy.set_param(path, combo.itemText(ind)))
             combo.setCurrentIndex(combo.findText(data))
+            combo.currentIndexChanged.connect(lambda ind: rospy.set_param(path, combo.itemText(ind)))
             layout.addWidget(combo)
         else:
             text = QLineEdit(data)
