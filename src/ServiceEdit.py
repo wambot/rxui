@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import math
 
 import rospy
@@ -66,7 +68,7 @@ class ServiceEdit(QWidget):
             res = service_proxy(*service_args)
             print "response: %s" % res
         except Exception as e:
-            self.response_label.setText("<i>" + e.message + "</i>")
+            self.response_label.setText("<i>" + str(e) + "</i>")
             print "exception: %s" % e
             return
         self.response_label.setText(str(res))
@@ -88,4 +90,12 @@ class ServiceEdit(QWidget):
             self.call_service_button.setEnabled(False)
             self.args_lineedit.setEnabled(False)
             
+if __name__ == "__main__":
+    import sys
+    import roslib
+    roslib.load_manifest("roslib")
+    app = QApplication(sys.argv)
+    win = ServiceEdit()
+    win.show()
+    app.exec_()
 
